@@ -25,20 +25,24 @@ function App() {
   };
   return (
     <div
-      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
+      className="app-shell relative min-h-screen w-full overflow-hidden bg-cover bg-center bg-no-repeat px-4 py-6 sm:px-6 sm:py-10"
       style={{
         backgroundImage: `url(${background})`,
       }}
     >
-      <div className="w-full">
-        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+      <div className="app-overlay pointer-events-none absolute inset-0" />
+      <div className="relative z-10 mx-auto w-full max-w-md">
+        <div className="app-card rounded-2xl border border-white/40 bg-white/20 p-4 shadow-2xl backdrop-blur-md sm:p-6">
+          <h1 className="mb-4 text-center text-xl font-semibold tracking-wide text-white sm:mb-5 sm:text-2xl">
+            Currency Converter
+          </h1>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               convert();
             }}
           >
-            <div className="w-full mb-1">
+            <div className="mb-2 w-full sm:mb-3">
               <InputBox
                 label="From"
                 amount={amount}
@@ -48,16 +52,16 @@ function App() {
                 onCurrencyChange={(currency) => setFrom(currency)}
               />
             </div>
-            <div className="relative w-full h-0.5">
+            <div className="relative h-3 w-full sm:h-4">
               <button
                 type="button"
-                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/80 bg-blue-600 px-3 py-1 text-sm font-medium capitalize text-white shadow-lg transition hover:bg-blue-700"
                 onClick={swap}
               >
                 swap
               </button>
             </div>
-            <div className="w-full mt-1 mb-4">
+            <div className="mb-4 mt-2 w-full sm:mb-5 sm:mt-3">
               <InputBox
                 label="To"
                 amount={amountConverted}
@@ -69,7 +73,7 @@ function App() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
+              className="w-full rounded-xl bg-blue-600 px-4 py-3 text-base font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-200"
             >
               Convert {from.toUpperCase()} to {to.toUpperCase()}
             </button>
